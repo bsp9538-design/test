@@ -1,0 +1,24 @@
+
+clear all;
+close all;
+A = input('Enter a 2x2 or 3x3 square matrix A: ');
+% Check square
+[m,n] = size(A);
+if m~=n
+error('Matrix must be square');
+end
+% Eigenvalues & Eigenvectors
+[P, D] = eig(A);
+disp('Eigenvalues (Diagonal Matrix D):');
+disp(D);
+disp('Eigenvectors (Matrix P):');
+disp(P);
+% Check if P is invertible
+if det(P) == 0
+disp('The matrix cannot be diagonalized (P is not invertible).');
+else
+% Diagonalization A = P D P^{-1}
+A_reconstructed = P * D * inv(P);
+disp('Matrix reconstructed from P * D * P^{-1}:');
+disp(A_reconstructed);
+end
